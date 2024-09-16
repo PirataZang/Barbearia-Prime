@@ -1,13 +1,16 @@
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetId);
+    // Impede o comportamento padrão do link (navegação imediata)
+    event.preventDefault();
   
-      window.scrollTo({
-        top: targetSection.offsetTop, // Compensação para o menu fixo
-        behavior: 'smooth'
-      });
-    });
-  });
+    // Obtém o ID do elemento alvo a partir do atributo href do link
+    const targetId = event.target.getAttribute("href").substring(1);
   
+    // Seleciona o elemento alvo usando jQuery ($) com base no ID
+    const targetElement = $("#" + targetId);
+  
+    // Verifica se o elemento alvo existe na página
+    if (targetElement.length) {
+      // Anima a rolagem suave usando jQuery
+      $("html, body").animate({
+        scrollTop: targetElement.offset().top
+      }, 1500); // A animação levará 1500 milissegundos (1,5 segundos)
+    }
